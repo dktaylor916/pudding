@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+<style>
+  .node {
+    cursor: pointer;
+  }
+
+  .node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+
+  .node--leaf {
+    fill: white;
+  }
+
+  .label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  }
+
+  .label,
+  .node--root,
+  .node--leaf {
+    pointer-events: none;
+  }
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    // Assuming data is your JavaScript object with the relevant properties
+    function updateData(year) {
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item[`type_${year}_simp`])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+      if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .2)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .2)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .2)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .2)";
+      }
+
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item[`type_${year}_simp`] === simp_type).map(item => item[`type_${year}`])));
+
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item[`type_${year}_simp`] === simp_type && item[`type_${year}`] === ty)[`color_${year}`];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem[`type_${year}_simp`] === simp_type && cityItem[`type_${year}`] === ty).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem[`color_${year}`].substring(3), "size": 1500, "year": year };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+
+    console.log(json_output);
+
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+}
+
+// Call the function with the desired year
+
+// Use json_output as needed in your JavaScript application.
+// For example, you can write it to a file or send it to a server.
+function updateDataContinent(year,cont) {
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item[`type_${year}_simp`])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+      if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .2)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .2)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .2)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .2)";
+      }
+
+      var continent = cont // Change this to your specific condition
+
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => (continent === cont && item.continent === continent) ? item[`type_2070_simp`] === simp_type : item[`type_${year}_simp`] === simp_type).map(item => [(continent === cont && item.continent === continent) ? item[`type_2070`] : item[`type_${year}`], (continent === cont && item.continent === continent) ? item[`color_2070`] : item[`color_${year}`]])));
+      
+      uniqueTypeColors.forEach(function(item) {
+        var ty = item[0];
+        var color = item[1];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Iterate over individual cities
+        data.filter(cityItem => (continent === cont && cityItem.continent === continent) ? cityItem[`type_2070_simp`] === simp_type && cityItem[`type_2070`] === ty : cityItem[`type_${year}_simp`] === simp_type && cityItem[`type_${year}`] === ty).forEach(function(cityItem) {
+          var child_node = { "name": cityItem.name.trim(), "continent": cityItem.continent, "color": (continent === cont && cityItem.continent === continent) ? cityItem[`color_2070`].substring(3) : cityItem[`color_${year}`].substring(3), "size": 1500, "year": (continent === cont && cityItem.continent === continent) ? 2070 : year };
+          
+          city_node["children"].push(child_node);
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = JSON.stringify(json_data, null, 2);
+
+    console.log(json_output);
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+}
+// Use json_output as needed in your JavaScript application.
+// For example, you can write it to a file or send it to a server.
+function updateDataCity(year,city) {
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item[`type_${year}_simp`])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+      if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .2)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .2)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .2)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .2)";
+      }
+
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item[`type_${year}_simp`] === simp_type).map(item => [item[`type_${year}`], item[`color_${year}`]])));
+      
+      uniqueTypeColors.forEach(function(item) {
+        var ty = item[0];
+        var color = item[1];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem[`type_${year}_simp`] === simp_type && cityItem[`type_${year}`] === ty).forEach(function(cityItem) {
+          var child_node = { 
+            "name": cityItem.name.trim(),
+            "continent": cityItem.continent,
+            "color": (cityItem.name === city) ? cityItem[`color_2070`].substring(3) : cityItem[`color_${year}`].substring(3),
+            "size": 1500,
+            "year": (cityItem.name === city) ? 2070 : year
+          };
+          
+          city_node["children"].push(child_node);
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = JSON.stringify(json_data, null, 2);
+
+    console.log(json_output);
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+}
+</script>

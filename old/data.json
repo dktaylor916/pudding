@@ -1,0 +1,522 @@
+[
+  {
+    "name": "root",
+    "parent": null,
+    "value": null
+  },
+  {
+    "name": "Temperate",
+    "parent": "root",
+    "value": null
+  },
+  {
+    "name": "Temperate, dry summer, hot summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Vatican City",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Barcelona",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Z\u00fcrich",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Lisbon",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Dublin",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Milan",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Frankfurt",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Hamburg",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Brussels",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "San Francisco",
+    "parent": "Temperate, dry summer, warm summer",
+    "size": 20,
+    "value": "rgb(200,200,0)"
+  },
+  {
+    "name": "Atlanta",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Geneva",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Johannesburg",
+    "parent": "Temperate, dry winter, warm summer",
+    "size": 20,
+    "value": "rgb(100,200,100)"
+  },
+  {
+    "name": "Amsterdam",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Casablanca",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "\u014csaka",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Athens",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Buenos Aires",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Melbourne",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Taipei",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Los Angeles",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Washington,  D.C.",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "London",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Cape Town",
+    "parent": "Temperate, dry summer, warm summer",
+    "size": 20,
+    "value": "rgb(200,200,0)"
+  },
+  {
+    "name": "Mexico City",
+    "parent": "Temperate, dry winter, warm summer",
+    "size": 20,
+    "value": "rgb(100,200,100)"
+  },
+  {
+    "name": "Rome",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Nairobi",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Bogota",
+    "parent": "Temperate, dry summer, warm summer",
+    "size": 20,
+    "value": "rgb(200,200,0)"
+  },
+  {
+    "name": "Shanghai",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Tokyo",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Paris",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Santiago",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "S\u00e3o Paulo",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Sydney",
+    "parent": "Temperate, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(200,255,80)"
+  },
+  {
+    "name": "Hong Kong",
+    "parent": "Temperate, dry winter, hot summer",
+    "size": 20,
+    "value": "rgb(150,255,150)"
+  },
+  {
+    "name": "Auckland",
+    "parent": "Temperate, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(100,255,80)"
+  },
+  {
+    "name": "Instanbul",
+    "parent": "Temperate, dry summer, hot summer",
+    "size": 20,
+    "value": "rgb(255,255,0)"
+  },
+  {
+    "name": "Temperate, no dry season, warm summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Temperate, no dry season, hot summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Temperate, dry summer, warm summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Temperate, dry winter, warm summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Temperate, dry winter, hot summer",
+    "parent": "Temperate",
+    "value": null
+  },
+  {
+    "name": "Cold",
+    "parent": "root",
+    "value": null
+  },
+  {
+    "name": "Cold, no dry season, hot summer",
+    "parent": "Cold",
+    "value": null
+  },
+  {
+    "name": "Boston",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Budapest",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Bucharest",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Oslo",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Warsaw",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Munich",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Helsinki",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "K\u00f8benhavn",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Chicago",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Stockholm",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Seoul",
+    "parent": "Cold, dry winter, hot summer",
+    "size": 20,
+    "value": "rgb(170,175,255)"
+  },
+  {
+    "name": "Berlin",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Toronto",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Vienna",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "New York",
+    "parent": "Cold, no dry season, hot summer",
+    "size": 20,
+    "value": "rgb(0,255,255)"
+  },
+  {
+    "name": "Moscow",
+    "parent": "Cold, no dry season, warm summer",
+    "size": 20,
+    "value": "rgb(55,200,255)"
+  },
+  {
+    "name": "Beijing",
+    "parent": "Cold, dry winter, hot summer",
+    "size": 20,
+    "value": "rgb(170,175,255)"
+  },
+  {
+    "name": "Cold, no dry season, warm summer",
+    "parent": "Cold",
+    "value": null
+  },
+  {
+    "name": "Cold, dry winter, hot summer",
+    "parent": "Cold",
+    "value": null
+  },
+  {
+    "name": "Tropical",
+    "parent": "root",
+    "value": null
+  },
+  {
+    "name": "Tropical, rainforest",
+    "parent": "Tropical",
+    "value": null
+  },
+  {
+    "name": "Kuala Lumpur",
+    "parent": "Tropical, rainforest",
+    "size": 20,
+    "value": "rgb(0,0,255)"
+  },
+  {
+    "name": "Miami",
+    "parent": "Tropical, monsoon",
+    "size": 20,
+    "value": "rgb(0,120,255)"
+  },
+  {
+    "name": "Caracas",
+    "parent": "Tropical, savannah",
+    "size": 20,
+    "value": "rgb(70,170,250)"
+  },
+  {
+    "name": "Bangkok",
+    "parent": "Tropical, savannah",
+    "size": 20,
+    "value": "rgb(70,170,250)"
+  },
+  {
+    "name": "Manila",
+    "parent": "Tropical, savannah",
+    "size": 20,
+    "value": "rgb(70,170,250)"
+  },
+  {
+    "name": "Lagos",
+    "parent": "Tropical, savannah",
+    "size": 20,
+    "value": "rgb(70,170,250)"
+  },
+  {
+    "name": "Jakarta",
+    "parent": "Tropical, monsoon",
+    "size": 20,
+    "value": "rgb(0,120,255)"
+  },
+  {
+    "name": "Mumbai",
+    "parent": "Tropical, monsoon",
+    "size": 20,
+    "value": "rgb(0,120,255)"
+  },
+  {
+    "name": "Rio de Janeiro",
+    "parent": "Tropical, savannah",
+    "size": 20,
+    "value": "rgb(70,170,250)"
+  },
+  {
+    "name": "Singapore",
+    "parent": "Tropical, rainforest",
+    "size": 20,
+    "value": "rgb(0,0,255)"
+  },
+  {
+    "name": "Tropical, monsoon",
+    "parent": "Tropical",
+    "value": null
+  },
+  {
+    "name": "Tropical, savannah",
+    "parent": "Tropical",
+    "value": null
+  },
+  {
+    "name": "Arid",
+    "parent": "root",
+    "value": null
+  },
+  {
+    "name": "Arid, steppe, cold",
+    "parent": "Arid",
+    "value": null
+  },
+  {
+    "name": "Prague",
+    "parent": "Arid, steppe, cold",
+    "size": 20,
+    "value": "rgb(255,220,100)"
+  },
+  {
+    "name": "Dubai",
+    "parent": "Arid, desert, hot",
+    "size": 20,
+    "value": "rgb(255,0,0)"
+  },
+  {
+    "name": "Madrid",
+    "parent": "Arid, steppe, cold",
+    "size": 20,
+    "value": "rgb(255,220,100)"
+  },
+  {
+    "name": "New Delhi",
+    "parent": "Arid, steppe, hot",
+    "size": 20,
+    "value": "rgb(245,165,0)"
+  },
+  {
+    "name": "Riyadh",
+    "parent": "Arid, desert, hot",
+    "size": 20,
+    "value": "rgb(255,0,0)"
+  },
+  {
+    "name": "Cairo",
+    "parent": "Arid, desert, hot",
+    "size": 20,
+    "value": "rgb(255,0,0)"
+  },
+  {
+    "name": "Arid, desert, hot",
+    "parent": "Arid",
+    "value": null
+  },
+  {
+    "name": "Arid, steppe, hot",
+    "parent": "Arid",
+    "value": null
+  }
+]

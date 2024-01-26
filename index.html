@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link href="btn.css" rel="stylesheet">
+
+<style>
+ svg{
+  scale: .85;
+ }
+  body{
+    background: #005c7a;;
+  }
+  .node,.label {
+    cursor: pointer;
+  }
+
+  .node:hover {
+  
+    stroke-width: 5px;
+  }
+
+  .node--leaf {
+    fill: white;
+  }
+
+ .label {
+    font: 11px "Inter";
+    text-anchor: middle;
+    fill: white;
+    color: white;
+	text-shadow: 0 0 2px rgba(0,0,0, 0.5), 0 0 2px rgba(0,0,0, 0.5);
+    
+}
+  .title {
+    font: 11px "Inter";
+    text-anchor:middle;
+    fill: white;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+ 
+  .search-container{
+    left:10px;
+    top:10px;
+    position: absolute;
+
+  }
+  .label{
+    z-index: 100;
+  }
+  .node.node--root{
+opacity:0
+  }
+  .node.node--leaf{
+opacity:.5;
+
+  }
+  .node{
+    opacity:.5
+    
+  }
+</style>
+<div></div>
+<svg  width="1000" height="1000"></svg>
+
+<br>
+
+<br>
+<br>
+<h1 id='year' style="transform: translateY(-1000px);"></h1>
+<button  class='btn-10'  style="transform: translateY(-1000px);" onclick="updateData(2070)"><span>All</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateData(2023)"><span>Reset</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('North America')"><span>North America</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('South America')"><span>South America</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('Africa')"><span>Africa</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('Asia')"><span>Asia</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('Europe')"><span>Europe</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataCont('Oceania')"><span>Oceania</span></button>
+<br>
+<br>
+<button class='btn-10' style="transform: translateY(-1000px);" onclick="updateDataGlobal('n')"><span>Global North</span></button>
+<br>
+<br>
+<button class='btn-10'  style="transform: translateY(-1000px);" onclick="updateDataGlobal('s')"><span>Global South</span></button>
+
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="javascript.js"></script>
+<script>
+
+  var svg = d3.select("svg").attr('transform','translate(100,-90)'),
+    margin = 20,
+    diameter = +svg.attr("width"),
+    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+  var defs = svg.append("defs");
+
+  var filter = defs.append("filter")
+    .attr("id", "drop-shadow")
+    .attr("height", "130%");
+
+  filter.append("feGaussianBlur")
+    .attr("in", "SourceAlpha")
+    .attr("stdDeviation", 2);
+
+  filter.append("feOffset")
+    .attr("dx", 1)
+    .attr("dy", 1);
+
+  var feMerge = filter.append("feMerge");
+  feMerge.append("feMergeNode");
+  feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
+
+  var color = d3.scaleLinear()
+    .domain([-1, 5])
+    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+    .interpolate(d3.interpolateHcl);
+
+
+  
+  
+  var pack = d3.pack()
+    .size([diameter - margin, diameter - margin])
+    .padding(5)
+  
+  
+    
+   
+
+  var currentData = "data_v2.json"; // Initial dataset
+
+  d3.json(currentData, function (error, root) {
+    if (error) throw error;
+
+
+
+    root = d3.hierarchy(root)
+      .sum(function (d) {return (d.size)})
+      .sort((a, b) => d3.descending(a.data.temp, b.data.temp))
+   
+
+
+
+    var focus = root,
+      nodes = pack(root).descendants(),
+      view;
+
+
+
+
+    var circle = g.selectAll("circle")
+      .data(nodes)
+      .enter().append("circle")
+      .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+      .style("fill", function (d) { return d.data.color ? d.data.color : 'white' })
+     
+      .style("stroke-width", 3)
+      
+      .on('click',function(d){updateCity(d.data.name)})
+      
+      
+      
+      
+      
+
+    var text = g.selectAll("text")
+      .data(nodes)
+      .enter().append("text")
+      .attr('class', function (d) { return d.data.size ?"label" : "title"; })
+      .style('font-weight',700)    
+      .style("fill-opacity", function (d) { return d.parent === root  || d.data.size ? 1 : 0; })
+      .style("display", function (d) { return d.parent === root  || d.data.size ?"inline" : "none"; })
+      .style('font-size', function (d) { return d.data.size ?".68em" : "1.4em"; }) 
+      .attr("transform", function (d) {
+          if (!['Temperate','Arid','Tropical','Cold'].includes(d.data.name)) {
+            
+            // Translate within the root node's position
+            return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+          } else {
+            // Translate as usual
+            return "translate(" + (d.x - focus.x) + "," + ((d.y - focus.y) - d.r) + ")";
+          }
+        })
+      
+      
+        .html(function (d) {
+  var nameParts = d.data.name.split(' ');
+
+  if (nameParts.length ==1) {
+    return nameParts[0];
+  } if (nameParts.length ==2)  {
+    return `<tspan dy='-5px' >${nameParts[0]}</tspan><tspan dx='-20px'dy='15px'>${nameParts[1]}</tspan>`;
+  }
+  else{
+    return `<tspan dy='-10px' dx='0px' >${nameParts[0]}</tspan><tspan dx='-10px'dy='15px'>${nameParts[1]}</tspan><tspan dx='-15px'dy='15px'>${nameParts[2]}</tspan>`;
+  }
+})
+      .on('click',function(d){updateCity(d.data.name)})
+      
+    
+ 
+   
+      
+    start1(2023)
+      
+ 
+    
+
+    
+  });
+
+function start(newRoot) {
+    
+    var newFocus = d3.hierarchy(newRoot)
+      .sum(function (d) { return d.size; })
+      .sort((a, b) => d3.descending(a.data.temp, b.data.temp))
+     
+      
+     
+    // Update the 'focus' variable with the new hierarchy
+    focus = newFocus;
+
+    // Compute the pack layout with the new data
+    var newNodes = pack(newFocus).descendants();
+
+ 
+
+    // Update circles with new data
+    var updateCircles = g.selectAll("circle")
+      .data(newNodes, function (d) { return d.data.name; });
+
+    // Remove circles that are no longer in the new dataset
+    updateCircles.exit().remove();
+
+    // Append new circles and transition existing ones
+    var enterCircles = updateCircles.enter().append("circle");
+    enterCircles.merge(updateCircles)
+     
+       // Adjust the duration as needed
+      .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+      .attr("transform", function (d) {
+        if (d.parent) {
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + d.x + "," + d.y + ")";
+        }
+      })
+      .attr("r", function (d) { return d.r })
+      .style("fill", function (d) { return d.data.color ? d.data.color : 'white'; })
+      .style("stroke", function(d) {
+        if(d.children){
+          return 'none'
+        }
+        else{
+  return d.data.temp && d.data.pre_color && d.data.pre_color !== d.data.color ? d.data.pre_color : '#777777';}
+})
+      .style("stroke-width", function(d){return (d.data.size && d.data.year == 2023 )? 0 :2});
+
+    // Update labels with new data
+    var updateLabels = g.selectAll("text")
+      .data(newNodes, function (d) { return d.data.name; });
+
+    // Remove labels that are no longer in the new dataset
+    updateLabels.exit().remove();
+
+    // Append new labels and transition existing ones
+    var enterLabels = updateLabels.enter().append("text");
+    enterLabels.merge(updateLabels)
+    
+      .attr('class', function (d) { return d.data.size ?"label" : "title"; })
+      .attr("transform", function (d) {
+        if (!['Temperate','Arid','Tropical','Cold'].includes(d.data.name)) {
+          
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + (d.x - focus.x) + "," + ((d.y - focus.y) - d.r) + ")";
+        }
+      })
+    
+  
+     
+
+}
+function loadDataAndTransition(newRoot) {
+  var selectedNodes = []
+  var newFocus = d3.hierarchy(newRoot)
+      .sum(function (d) { return d.size; })
+      .sort((a, b) => d3.descending(a.data.temp, b.data.temp))
+    
+  
+    // Update the 'focus' variable with the new hierarchy
+    focus = newFocus;
+
+    // Compute the pack layout with the new data
+    var newNodes = pack(newFocus).descendants();
+
+    // Update circles with new data
+    var updateCircles = g.selectAll("circle")
+      .data(newNodes, function (d) { return d.data.name; })
+     
+    // Remove circles that are no longer in the new dataset
+    updateCircles.exit().remove()
+  
+   
+    // Append new circles and transition existing ones
+    var enterCircles = updateCircles.enter().append("circle");
+    enterCircles.merge(updateCircles).style("stroke-width", function(d){if(d.children){
+          return 0
+        }
+        if(d.data.year == 2023){
+          return .4
+        }
+        if(d.data.year == 2070 && d.data.pre_color == d.data.color){
+            return 2}
+            if(d.data.year == 2070 && d.data.pre_color != d.data.color){
+            return 4} 
+        })
+        .style('opacity',function(d){
+        if (d.data.year == 2070){
+          return .9
+        }}
+        )
+       // Adjust the duration as needed
+      .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+      .style("stroke", function(d) {
+        if(d.children){
+          return 'white'
+        }
+        else{
+  return d.data.temp && d.data.pre_color && d.data.pre_color !== d.data.color ? d.data.pre_color : '#777777';}
+})
+.style("fill", function (d) { return d.data.color ? d.data.color : 'white'; })
+      .transition()
+      .duration(2500)
+      .attr("transform", function (d) {
+        if (d.parent) {
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + d.x + "," + d.y + ")";
+        }
+      })
+      .attr("r", function (d) { return d.r })
+      .style("fill", function (d) { return d.data.color ? d.data.color : 'white'; })
+
+      setTimeout(check(), 100);
+
+      
+
+    // Update labels with new data
+    var updateLabels = g.selectAll("text")
+      .data(newNodes, function (d) { return d.data.name; });
+
+    // Remove labels that are no longer in the new dataset
+    updateLabels.exit().remove();
+
+    // Append new labels and transition existing ones
+    var enterLabels = updateLabels.enter().append("text");
+    enterLabels.merge(updateLabels)
+   .style('font-size', function(d){
+    if (d.data.size && d.data.year == 2070){
+      return '.75em'
+    }
+    if (d.data.size && d.data.year == 2023){
+      return '.65em'
+    } 
+    if (!d.data.size){
+      return '1.4em'
+    }       
+
+   })
+ 
+      .transition()
+      .duration(2500)
+      .attr('class', function (d) { return d.data.size ?"label" : "title"; })
+      .attr("transform", function (d) {
+        if (!['Temperate','Arid','Tropical','Cold'].includes(d.data.name)) {
+          
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + (d.x - focus.x) + "," + ((d.y - focus.y) - d.r) + ")";
+        }
+      })
+  
+ 
+      .html(function (d) {
+  var nameParts = d.data.name.split(' ');
+
+  if (nameParts.length ==1) {
+    return nameParts[0];
+  } if (nameParts.length ==2)  {
+    return `<tspan dy='-5px' >${nameParts[0]}</tspan><tspan dx='-20px'dy='15px'>${nameParts[1]}</tspan>`;
+  }
+  else{
+    return `<tspan dy='-10px' dx='0px' >${nameParts[0]}</tspan><tspan dx='-10px'dy='15px'>${nameParts[1]}</tspan><tspan dx='-15px'dy='15px'>${nameParts[2]}</tspan>`;
+  }
+})
+
+
+
+
+}
+
+function loadDataAndTransitionCity(newRoot) {
+    
+    var newFocus = d3.hierarchy(newRoot)
+      .sum(function (d) { return d.size; })
+      .sort((a, b) => d3.descending(a.data.temp, b.data.temp))
+     
+     
+    // Update the 'focus' variable with the new hierarchy
+    focus = newFocus;
+
+    // Compute the pack layout with the new data
+    var newNodes = pack(newFocus).descendants();
+
+    // Update circles with new data
+    var updateCircles = g.selectAll("circle")
+      .data(newNodes, function (d) { return d.data.name; });
+
+    // Remove circles that are no longer in the new dataset
+    updateCircles.exit().remove();
+    console.log(updateCircles)
+
+
+    // Append new circles and transition existing ones
+    var enterCircles = updateCircles.enter().append("circle");
+    enterCircles.merge(updateCircles).style("stroke-width", function(d){if(d.children){
+          return 2
+        }
+        if(d.data.year == 2023){
+          return 0
+        }
+        if(d.data.year == 2070 && d.data.pre_color == d.data.color){
+            return 2}
+            if(d.data.year == 2070 && d.data.pre_color != d.data.color){
+            return 4} 
+        })
+      .style('opacity',function(d){
+        if (d.data.year == 2070){
+          return .9
+        }
+      })
+      
+      
+       // Adjust the duration as needed
+      .attr("class", function (d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+      .style("stroke", function(d) {
+        if(d.children){
+          return 'none'
+        }
+        else{
+  return d.data.temp && d.data.pre_color && d.data.pre_color !== d.data.color ? d.data.pre_color : '#777777';}
+})
+.style("fill", function (d) { return d.data.color ? d.data.color : 'white'; })
+      .transition()
+      .duration(2500)
+      .attr("transform", function (d) {
+        if (d.parent) {
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + d.x + "," + d.y + ")";
+        }
+      })
+      .attr("r", function (d) { return d.r })
+      .style("fill", function (d) { return d.data.color ? d.data.color : 'white'; })
+     
+      
+
+    // Update labels with new data
+    var updateLabels = g.selectAll("text")
+      .data(newNodes, function (d) { return d.data.name; });
+
+    // Remove labels that are no longer in the new dataset
+    updateLabels.exit().remove();
+
+    // Append new labels and transition existing ones
+    var enterLabels = updateLabels.enter().append("text");
+    enterLabels.merge(updateLabels)
+   .style('font-size', function(d){
+    if (d.data.size && d.data.year == 2070){
+      return '.75em'
+    }
+    if (d.data.size && d.data.year == 2023){
+      return '.62em'
+    } 
+    if (!d.data.size){
+      return '1.4em'
+    }       
+
+   })
+ 
+      .transition()
+      .duration(2500)
+      .attr('class', function (d) { return d.data.size ?"label" : "title"; })
+      .attr("transform", function (d) {
+        if (!['Temperate','Arid','Tropical','Cold'].includes(d.data.name)) {
+          
+          // Translate within the root node's position
+          return "translate(" + (d.x - focus.x) + "," + (d.y - focus.y) + ")";
+        } else {
+          // Translate as usual
+          return "translate(" + (d.x - focus.x) + "," + ((d.y - focus.y) - d.r) + ")";
+        }
+      })
+  
+ 
+      .html(function (d) {
+  var nameParts = d.data.name.split(' ');
+
+  if (nameParts.length ==1) {
+    return nameParts[0];
+  } if (nameParts.length ==2)  {
+    return `<tspan dy='-5px' >${nameParts[0]}</tspan><tspan dx='-20px'dy='15px'>${nameParts[1]}</tspan>`;
+  }
+  else{
+    return `<tspan dy='-10px' dx='0px' >${nameParts[0]}</tspan><tspan dx='-10px'dy='15px'>${nameParts[1]}</tspan><tspan dx='-15px'dy='15px'>${nameParts[2]}</tspan>`;
+  }
+})
+
+     
+
+   
+  ;
+  
+}
+
+
+
+
+function updateData(year) {
+  
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item[`type_${year}_simp`])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+         if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .6)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .6)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .6)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .6)";
+      }
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item[`type_${year}_simp`] === simp_type).map(item => item[`type_${year}`])));
+
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item[`type_${year}_simp`] === simp_type && item[`type_${year}`] === ty)[`color_${year}`];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem[`type_${year}_simp`] === simp_type && cityItem[`type_${year}`] === ty).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem[`color_${year}`].substring(3), "size": 1500, "year": year,"temp":cityItem[`temp_${year}`],"pre_color": cityItem[`color_2023`].substring(3)};
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+    loadDataAndTransition(json_output);
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+}
+
+function updateDataCont(continent) {
+  updateData('2023')
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item['type_2023_simp'])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+         if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .6)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .6)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .6)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .6)";
+      }
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item['type_2023_simp'] === simp_type).map(item => item['type_2023'])));
+
+    
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item['type_2023_simp'] === simp_type && item['type_2023'] === ty)['color_2023'];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem['type_2070_simp'] === simp_type && cityItem['type_2070'] === ty && cityItem['continent'] === continent).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2070'].substring(3), "size": 1500, "year": 2070, "temp":cityItem['temp_2070'],"pre_color": cityItem['color_2023'].substring(3) };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        // For non-European cities, use data from 2023
+        data.filter(cityItem => cityItem['type_2023_simp'] === simp_type && cityItem['type_2023'] === ty && cityItem['continent'] !== continent).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2023'].substring(3), "size": 1500, "year": 2023,"temp":cityItem['temp_2023']  };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+
+  
+
+    loadDataAndTransition(json_output);
+    
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+  
+}
+
+function updateDataGlobal(ns) {
+  updateData('2023')
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item['type_2023_simp'])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+         if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .6)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .6)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .6)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .6)";
+      }
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item['type_2023_simp'] === simp_type).map(item => item['type_2023'])));
+
+      
+
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item['type_2023_simp'] === simp_type && item['type_2023'] === ty)['color_2023'];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem['type_2070_simp'] === simp_type && cityItem['type_2070'] === ty && cityItem['global'] === ns).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2070'].substring(3), "global":ns,"size": 1500, "year": 2070 , "temp":cityItem['temp_2070'],"pre_color": cityItem['color_2023'].substring(3)  };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        // For non-European cities, use data from 2023
+        data.filter(cityItem => cityItem['type_2023_simp'] === simp_type && cityItem['type_2023'] === ty && cityItem['global'] !== ns).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2023'].substring(3),"global":ns, "size": 1500, "year": 2023,"temp":cityItem['temp_2023']  };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+
+
+    loadDataAndTransition(json_output);
+    
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+  
+}
+var nameList = []
+function updateCity(name) {
+  nameList.push(name)
+
+ 
+
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item['type_2023_simp'])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+         if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .6)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .6)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .6)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .6)";
+      }
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item['type_2023_simp'] === simp_type).map(item => item['type_2023'])));
+
+     
+
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item['type_2023_simp'] === simp_type && item['type_2023'] === ty)['color_2023'];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem['type_2070_simp'] === simp_type && cityItem['type_2070'] === ty && nameList.includes(cityItem['name'])).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2070'].substring(3),"size": 1500, "year": 2070 , "temp":cityItem['temp_2070'],"pre_color": cityItem['color_2023'].substring(3) };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        // For non-European cities, use data from 2023
+        data.filter(cityItem => cityItem['type_2023_simp'] === simp_type && cityItem['type_2023'] === ty && !nameList.includes(cityItem['name'])).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem['color_2023'].substring(3), "size": 1500, "year": 2023,"temp":cityItem['temp_2023']  };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+
+   
+
+    loadDataAndTransitionCity(json_output);
+    
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+  
+}
+
+function start1(year) {
+ 
+  d3.csv('gc_clim_pudding_v5.csv', function(data) {
+    var json_data = { "name": "root", "children": [] };
+
+    var uniqueSimpTypes = Array.from(new Set(data.map(item => item[`type_${year}_simp`])));
+
+    uniqueSimpTypes.forEach(function(simp_type) {
+      var type_node = { "name": simp_type, "children": [] };
+
+         if (simp_type === 'Temperate') {
+        type_node["color"] = "rgba(88, 249, 104, .6)";
+      } else if (simp_type === 'Arid') {
+        type_node["color"] = "rgba(249, 88, 88, .6)";
+      } else if (simp_type === 'Tropical') {
+        type_node["color"] = "rgba(88, 152, 249, .6)";
+      } else if (simp_type === 'Cold') {
+        type_node["color"] = "rgba(178, 88, 249, .6)";
+      }
+      var uniqueTypeColors = Array.from(new Set(data.filter(item => item[`type_${year}_simp`] === simp_type).map(item => item[`type_${year}`])));
+
+      uniqueTypeColors.forEach(function(ty) {
+        // Find the first matching item to get the color
+        var color = data.find(item => item[`type_${year}_simp`] === simp_type && item[`type_${year}`] === ty)[`color_${year}`];
+
+        var city_node = { "name": ty.trim(), "color": color.substring(3), "children": [] };
+
+        // Use a Set to keep track of unique child names for each simp_type
+        var uniqueChildNames = new Set();
+
+        // Iterate over individual cities
+        data.filter(cityItem => cityItem[`type_${year}_simp`] === simp_type && cityItem[`type_${year}`] === ty).forEach(function(cityItem) {
+          var childName = cityItem.name.trim();
+
+          // Check if the child name is unique for this simp_type
+          if (!uniqueChildNames.has(childName)) {
+            uniqueChildNames.add(childName);
+
+            var child_node = { "name": childName, "continent": cityItem.continent, "color": cityItem[`color_${year}`].substring(3), "size": 1500, "year": year,"temp":cityItem[`temp_2023`]  };
+
+            city_node["children"].push(child_node);
+          }
+        });
+
+        type_node["children"].push(city_node);
+      });
+
+      json_data["children"].push(type_node);
+    });
+
+    // Convert the object to JSON
+    var json_output = json_data;
+    start(json_output);
+    // You can use the json_output as needed, for example, update your visualization with this data.
+  });
+}
+
+
+function check(){
+   selectedNodes = d3.selectAll('circle.node.node--leaf')
+  .filter(function(d) {
+    return d.data.year === 2023;
+  });
+  console.log(selectedNodes)
+  if(selectedNodes['_groups'][0].length == 0){
+    d3.select("svg").transition().duration(2500).attr('transform', 'translate(50,-210)')
+  }
+  else{
+    d3.select("svg").transition().duration(2500).attr('transform', 'translate(100,-90)')
+  }
+}
+
+
+</script>
+

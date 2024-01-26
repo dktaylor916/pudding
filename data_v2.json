@@ -1,0 +1,609 @@
+{
+  "name": "root",
+  "children": [
+    {
+      "name": "Temperate",
+      "children": [
+        {
+          "name": "Temperate, no dry season, warm summer",
+          "color": "rgb(100,255,80)",
+          "children": [
+            {
+              "name": "Amsterdam",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 10.41
+            },
+            {
+              "name": "Auckland",
+              "continent": "Oceania",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 14.64
+            },
+            {
+              "name": "Brussels",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 10.96
+            },
+            {
+              "name": "Dublin",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 10.37
+            },
+            {
+              "name": "Frankfurt",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 9.94
+            },
+            {
+              "name": "Geneva",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 9.54
+            },
+            {
+              "name": "Hamburg",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 9.47
+            },
+            {
+              "name": "London",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 10.41
+            },
+            {
+              "name": "Melbourne",
+              "continent": "Oceania",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 14.61
+            },
+            {
+              "name": "Nairobi",
+              "continent": "Africa",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 18.92
+            },
+            {
+              "name": "Paris",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 11.96
+            },
+            {
+              "name": "Z\u00fcrich",
+              "continent": "Europe",
+              "color": "rgb(100,255,80)",
+              "size": 1500,
+              "temp": 5.48
+            }
+          ]
+        },
+        {
+          "name": "Temperate, dry summer, hot summer",
+          "color": "rgb(255,255,0)",
+          "children": [
+            {
+              "name": "Athens",
+              "continent": "North America",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 17.13
+            },
+            {
+              "name": "Barcelona",
+              "continent": "Europe",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 16.93
+            },
+            {
+              "name": "Casablanca",
+              "continent": "Africa",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 18.79
+            },
+            {
+              "name": "Instanbul",
+              "continent": "Asia",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 19.0
+            },
+            {
+              "name": "Lisbon",
+              "continent": "Europe",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 17.1
+            },
+            {
+              "name": "Los Angeles",
+              "continent": "North America",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 15.44
+            },
+            {
+              "name": "Rome",
+              "continent": "Europe",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 16.36
+            },
+            {
+              "name": "Santiago",
+              "continent": "South America",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 12.9
+            },
+            {
+              "name": "Vatican City",
+              "continent": "Europe",
+              "color": "rgb(255,255,0)",
+              "size": 1500,
+              "temp": 16.36
+            }
+          ]
+        },
+        {
+          "name": "Temperate, no dry season, hot summer",
+          "color": "rgb(200,255,80)",
+          "children": [
+            {
+              "name": "Atlanta",
+              "continent": "North America",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 16.36
+            },
+            {
+              "name": "Buenos Aires",
+              "continent": "South America",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 16.71
+            },
+            {
+              "name": "Milan",
+              "continent": "Europe",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 12.32
+            },
+            {
+              "name": "Shanghai",
+              "continent": "Asia",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 16.62
+            },
+            {
+              "name": "Sydney",
+              "continent": "Oceania",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 17.22
+            },
+            {
+              "name": "S\u00e3o Paulo",
+              "continent": "South America",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 20.98
+            },
+            {
+              "name": "Taipei",
+              "continent": "Asia",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 22.21
+            },
+            {
+              "name": "Tokyo",
+              "continent": "Asia",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 14.62
+            },
+            {
+              "name": "Washington D.C.",
+              "continent": "North America",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 13.67
+            },
+            {
+              "name": "\u014csaka",
+              "continent": "Asia",
+              "color": "rgb(200,255,80)",
+              "size": 1500,
+              "temp": 14.31
+            }
+          ]
+        },
+        {
+          "name": "Temperate, dry summer, warm summer",
+          "color": "rgb(200,200,0)",
+          "children": [
+            {
+              "name": "Bogota",
+              "continent": "South America",
+              "color": "rgb(200,200,0)",
+              "size": 1500,
+              "temp": 15.0
+            },
+            {
+              "name": "Cape Town",
+              "continent": "Africa",
+              "color": "rgb(200,200,0)",
+              "size": 1500,
+              "temp": 16.67
+            },
+            {
+              "name": "San Francisco",
+              "continent": "North America",
+              "color": "rgb(200,200,0)",
+              "size": 1500,
+              "temp": 14.98
+            }
+          ]
+        },
+        {
+          "name": "Temperate, dry winter, hot summer",
+          "color": "rgb(150,255,150)",
+          "children": [
+            {
+              "name": "Hong Kong",
+              "continent": "Asia",
+              "color": "rgb(150,255,150)",
+              "size": 1500,
+              "temp": 23.46
+            }
+          ]
+        },
+        {
+          "name": "Temperate, dry winter, warm summer",
+          "color": "rgb(100,200,100)",
+          "children": [
+            {
+              "name": "Johannes burg",
+              "continent": "Africa",
+              "color": "rgb(100,200,100)",
+              "size": 1500,
+              "temp": 17.66
+            },
+            {
+              "name": "Mexico City",
+              "continent": "North America",
+              "color": "rgb(100,200,100)",
+              "size": 1500,
+              "temp": 18.33
+            }
+          ]
+        }
+      ],
+      "color": "rgba(88, 249, 104, .2)"
+    },
+    {
+      "name": "Tropical",
+      "children": [
+        {
+          "name": "Tropical, savannah",
+          "color": "rgb(70,170,250)",
+          "children": [
+            {
+              "name": "Bangkok",
+              "continent": "Asia",
+              "color": "rgb(70,170,250)",
+              "size": 1500,
+              "temp": 28.36
+            },
+            {
+              "name": "Caracas",
+              "continent": "South America",
+              "color": "rgb(70,170,250)",
+              "size": 1500,
+              "temp": 24.78
+            },
+            {
+              "name": "Lagos",
+              "continent": "Africa",
+              "color": "rgb(70,170,250)",
+              "size": 1500,
+              "temp": 27.25
+            },
+            {
+              "name": "Manila",
+              "continent": "Asia",
+              "color": "rgb(70,170,250)",
+              "size": 1500,
+              "temp": 26.54
+            },
+            {
+              "name": "Rio de Janeiro",
+              "continent": "South America",
+              "color": "rgb(70,170,250)",
+              "size": 1500,
+              "temp": 23.52
+            }
+          ]
+        },
+        {
+          "name": "Tropical, monsoon",
+          "color": "rgb(0,120,255)",
+          "children": [
+            {
+              "name": "Jakarta",
+              "continent": "Asia",
+              "color": "rgb(0,120,255)",
+              "size": 1500,
+              "temp": 27.35
+            },
+            {
+              "name": "Miami",
+              "continent": "North America",
+              "color": "rgb(0,120,255)",
+              "size": 1500,
+              "temp": 24.8
+            },
+            {
+              "name": "Mumbai",
+              "continent": "Asia",
+              "color": "rgb(0,120,255)",
+              "size": 1500,
+              "temp": 27.39
+            }
+          ]
+        },
+        {
+          "name": "Tropical, rainforest",
+          "color": "rgb(0,0,255)",
+          "children": [
+            {
+              "name": "Kuala Lumpur",
+              "continent": "Asia",
+              "color": "rgb(0,0,255)",
+              "size": 1500,
+              "temp": 26.39
+            },
+            {
+              "name": "Singapore",
+              "continent": "Asia",
+              "color": "rgb(0,0,255)",
+              "size": 1500,
+              "temp": 27.77
+            }
+          ]
+        }
+      ],
+      "color": "rgba(88, 152, 249, .2)"
+    },
+    {
+      "name": "Cold",
+      "children": [
+        {
+          "name": "Cold, dry winter, hot summer",
+          "color": "rgb(170,175,255)",
+          "children": [
+            {
+              "name": "Beijing",
+              "continent": "Asia",
+              "color": "rgb(170,175,255)",
+              "size": 1500,
+              "temp": 10.12
+            },
+            {
+              "name": "Seoul",
+              "continent": "Asia",
+              "color": "rgb(170,175,255)",
+              "size": 1500,
+              "temp": 10.48
+            }
+          ]
+        },
+        {
+          "name": "Cold, no dry season, warm summer",
+          "color": "rgb(55,200,255)",
+          "children": [
+            {
+              "name": "Berlin",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 9.7
+            },
+            {
+              "name": "Helsinki",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 5.65
+            },
+            {
+              "name": "Copenhagen",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 8.38
+            },
+            {
+              "name": "Moscow",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 5.68
+            },
+            {
+              "name": "Munich",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 8.44
+            },
+            {
+              "name": "Oslo",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 5.28
+            },
+            {
+              "name": "Prague",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 8.82
+            },
+            {
+              "name": "Stockholm",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 6.98
+            },
+            {
+              "name": "Vienna",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 9.26
+            },
+            {
+              "name": "Warsaw",
+              "continent": "Europe",
+              "color": "rgb(55,200,255)",
+              "size": 1500,
+              "temp": 8.72
+            }
+          ]
+        },
+        {
+          "name": "Cold, no dry season, hot summer",
+          "color": "rgb(0,255,255)",
+          "children": [
+            {
+              "name": "Boston",
+              "continent": "North America",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 10.72
+            },
+            {
+              "name": "Bucharest",
+              "continent": "Europe",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 12.07
+            },
+            {
+              "name": "Budapest",
+              "continent": "Europe",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 9.71
+            },
+            {
+              "name": "Chicago",
+              "continent": "North America",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 9.75
+            },
+            {
+              "name": "New York",
+              "continent": "North America",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 11.57
+            },
+            {
+              "name": "Toronto",
+              "continent": "North America",
+              "color": "rgb(0,255,255)",
+              "size": 1500,
+              "temp": 7.56
+            }
+          ]
+        }
+      ],
+      "color": "rgba(178, 88, 249, .2)"
+    },
+    {
+      "name": "Arid",
+      "children": [
+        {
+          "name": "Arid, desert, hot",
+          "color": "rgb(255,0,0)",
+          "children": [
+            {
+              "name": "Cairo",
+              "continent": "Africa",
+              "color": "rgb(255,0,0)",
+              "size": 1500,
+              "temp": 21.86
+            },
+            {
+              "name": "Dubai",
+              "continent": "Asia",
+              "color": "rgb(255,0,0)",
+              "size": 1500,
+              "temp": 27.79
+            },
+            {
+              "name": "Riyadh",
+              "continent": "Asia",
+              "color": "rgb(255,0,0)",
+              "size": 1500,
+              "temp": 26.3
+            }
+          ]
+        },
+        {
+          "name": "Arid, steppe, cold",
+          "color": "rgb(255,220,100)",
+          "children": [
+            {
+              "name": "Madrid",
+              "continent": "Europe",
+              "color": "rgb(255,220,100)",
+              "size": 1500,
+              "temp": 15.12
+            }
+          ]
+        },
+        {
+          "name": "Arid, steppe, hot",
+          "color": "rgb(245,165,0)",
+          "children": [
+            {
+              "name": "New Delhi",
+              "continent": "Asia",
+              "color": "rgb(245,165,0)",
+              "size": 1500,
+              "temp": 25.14
+            }
+          ]
+        }
+      ],
+      "color": "rgba(249, 88, 88, .2)"
+    }
+  ]
+}
