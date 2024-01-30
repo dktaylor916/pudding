@@ -29,6 +29,7 @@
     fill: white;
     color: white;
 	text-shadow: 0 0 2px rgba(0,0,0, 0.5), 0 0 2px rgba(0,0,0, 0.5);
+  pointer-events: none;
 
 
     
@@ -216,20 +217,8 @@ opacity:.5;
   else{
     return `<tspan dy='-10px' dx='0px' >${nameParts[0]}</tspan><tspan dx='-10px'dy='15px'>${nameParts[1]}</tspan><tspan dx='-15px'dy='15px'>${nameParts[2]}</tspan>`;
   }
-}).on('mouseover',function(d){
-  d3.selectAll('circle')
-  .filter(function(e) {
-    return e.data.name === d.data.name;
-  }).style('opacity',1)
-  
-}) 
-.on('mouseout',function(d){
-  d3.selectAll('circle')
-  .filter(function(e) {
-    return e.data.name === d.data.name;
-  }).style('opacity',.5)
-  
-})   .on('click',function(d){updateCity(d.data.name)})
+})
+  .on('click',function(d){updateCity(d.data.name)})
       
     
  
