@@ -29,7 +29,7 @@
     fill: white;
     color: white;
 	text-shadow: 0 0 2px rgba(0,0,0, 0.5), 0 0 2px rgba(0,0,0, 0.5);
- 
+
 
     
 }
@@ -58,10 +58,8 @@ opacity:.5;
 
   }
   .node.node--leaf:hover{
-    
-    stroke:black;
-    opacity:1 ;
-
+    opacity: 1;
+  
   }
 
   .node{
@@ -218,8 +216,20 @@ opacity:.5;
   else{
     return `<tspan dy='-10px' dx='0px' >${nameParts[0]}</tspan><tspan dx='-10px'dy='15px'>${nameParts[1]}</tspan><tspan dx='-15px'dy='15px'>${nameParts[2]}</tspan>`;
   }
-})
-      .on('click',function(d){updateCity(d.data.name)})
+}).on('mouseover',function(d){
+  d3.selectAll('circle')
+  .filter(function(e) {
+    return e.data.name === d.data.name;
+  }).style('opacity',1)
+  
+}) 
+.on('mouseout',function(d){
+  d3.selectAll('circle')
+  .filter(function(e) {
+    return e.data.name === d.data.name;
+  }).style('opacity',.5)
+  
+})   .on('click',function(d){updateCity(d.data.name)})
       
     
  
@@ -515,7 +525,7 @@ function loadDataAndTransitionCity(newRoot) {
       return '.75em'
     }
     if (d.data.size && d.data.year == 2023){
-      return '.62em'
+      return '.65em'
     } 
     if (!d.data.size){
       return '1.4em'
